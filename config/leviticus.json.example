@@ -1,0 +1,23 @@
+{
+	"allowedDomains":"*",
+	"db":{
+		"host":"localhost",
+		"user":"wikiuser",
+		"password":"wikiuser"
+	},
+	"dbList": {
+		"bdh":"narrwiki_bdh",
+		"dm":"narrwiki_dm",
+		"faerun":"narrwiki_faerun",
+		"oathkeep":"narrwiki_oathkeep",
+		"starwars":"narrwiki_starwars",
+		"system6":"narrwiki_system6",
+		"system7":"narrwiki_system7",
+		"homeworlds":"narrwiki_homeworlds",
+		"ginodm":"narrwiki_ginodm",
+		"appleschool":"narrwiki_appleschool"
+	},
+	"uploadFolder":"/Users/kenjura/Dropbox/dev/www/bertball.com/",
+	"port":3001
+}
+
