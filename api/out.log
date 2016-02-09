@@ -1,0 +1,1 @@
+SELECT id,name,revisionId FROM narrwiki_homeworlds.article

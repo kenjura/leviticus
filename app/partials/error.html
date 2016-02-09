@@ -1,0 +1,5 @@
+<div class="error" active="{{homeCtrl.state.isError()}}">
+	<span>{{homeCtrl.state.errorMessage}}</span>
+	<!-- <span class="button" ng-click="homeCtrl.state.clearError('ALL')">close</span> -->
+	<span class="icon-cross error-close" ng-click="homeCtrl.state.clearError('ALL')"></span>
+</div>

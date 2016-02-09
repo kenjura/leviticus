@@ -1,0 +1,126 @@
+
+
+.wikiImage, .noImage {
+	display: inline-block;
+	cursor: pointer;	
+	-webkit-transition: box-shadow 0.3s;	
+	position: relative;
+	overflow: hidden;
+	max-width: 100%;
+	margin-bottom: -6px;
+}
+.wikiImage img {
+	width: 100%;
+}
+.wikiImage.center {
+	display: block;
+	text-align: center;
+}
+.wikiImage.center img {
+	width: auto;
+}
+.wikiImage {
+}
+.wikiImage_caption {
+	/*display: none;*/
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	max-height: 75%;
+	background: rgba(0,0,0,0.75);
+	color: white;
+	overflow: auto;
+	padding: 10px;
+	text-align: center;
+	box-sizing: border-box;
+	opacity: 0;
+	-webkit-transition: top 0.2s, opacity 0.2s;
+}
+.wikiImage:hover .wikiImage_caption {
+	opacity: 1;
+	/*-webkit-animation: fadeIn 0.3s ease-out;*/
+}
+@-webkit-keyframes fadeIn {
+	0% { opacity: 0; top: 100%; }
+	100% { opacity: 1; top: 60%; }
+}
+.noImage {
+	background: #CCC;
+	color: #666;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	font-size: 30px;
+}
+.noImage:hover, .wikiImage:hover {
+	box-shadow: 0 0 10px 5px rgba(255,255,0,0.75);
+}
+
+
+#imageModal .modal_content {
+	height: 100%;
+}
+.imagePreview {
+	width:100%;
+	height: 100%;
+	text-align: center;
+	background: #333;
+	box-shadow: inset 0 0 5px 5px rgba(0,0,0,0.5);
+	overflow: auto;
+}
+.imageControls {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: rgba(255,255,255,0.75);
+}
+
+
+
+.imagePanel {
+	background: #333;
+	position: fixed;
+	top: 40px;
+	left: 0;
+	width: 0;
+	height: calc(100vh - 40px);
+	overflow: hidden;
+	transition: width 0.25s ease-in-out;
+	z-index: 150;
+	/*padding-top: 25px;*/
+	box-sizing: border-box;
+}
+.imagePanel .button:nth-of-type(1) { border-bottom: 2px solid hsl(0,100%,50%);}
+.imagePanel .button:nth-of-type(2) { border-bottom: 2px solid hsl(120,100%,50%);}
+.imagePanel .button:nth-of-type(3) { border-bottom: 2px solid hsl(240,100%,50%);}
+
+.imagePanel[isOpen="true"] {
+	width: 50vw;
+	box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+}
+
+
+.activeImage {
+	max-height: 100%;
+	max-width: 100%;
+}
+.activeImageContainer {
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+.activeImageContainer[is-empty=true]::before {
+	color: rgba(255,255,255,0.2);
+	content: "\e609";
+	font-family: 'icomoon';
+	font-size: 60vh;
+	text-shadow: 1px 1px rgba(0,0,0,0.5);
+}
+
+#uploadInput {
+	opacity: 0;
+	-webkit-transform: scale(0);
+}

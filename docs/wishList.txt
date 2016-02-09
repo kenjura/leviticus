@@ -1,0 +1,40 @@
+=Wish List=
+Horrible, crippling, ridiculous bugs:
+* When you POST an article with an existing name which has no revision for the supplied version, it naively assumes the article doesn't exist, and so it creates a new one.
+** Solution: time to just sunset articleId? It's kind of a waste of time. Versioned article renaming seems like a small price to pay.
+** Status: FIXED, not thoroughly tested.
+
+Bugs:
+* When you go forward/backward (or maybe navigate in menu) while in draft mode, the draft disappears
+** DONE, not thoroughly tested
+* When you set to any version other than the latest stable, you can't edit anything! This is probably because the "create/update draft" SQL isn't bothering with version number, or drafts aren't version-specific for some reason.
+** DONE, not thoroughly tested
+* Literally cannot update the menu on the s7 site (possibly others/all). It makes a new article every time.
+** Fixed?
+* When your session expires, the UI fails to detect it and prompt accordingly. Also, the API should return 401, not "no user found".
+* When you send the wrong username/password to login, there is no error messsage.
+
+WikiUtil:
+* Render inside each TD/TH as if it were on its own line, so things like indent work as expected.
+* Flair: tokens in wikitext that add classes to #articleView.
+
+Images:
+* Refresh images on upload, not on hard refresh
+
+Article Edit:
+* Show active drafts for other users.
+* Resize view/edit divider as you see fit; toggle becomes "auto update" only.
+* If you edit an article with a draft for version X, but a published revision of version Y, where Y.rank>X.rank...wtf do you do?
+
+Social:
+* Provide RSS feeds and/or emails.
+* Comments!
+
+Visual:
+* Version icon.
+* Tooltips for gears.
+* TOC: more intuitive way to open, and/or keyboard shortcut.
+
+General:
+* Restore "linkedArticles" feature
+* Favorites!

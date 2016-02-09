@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<table>
+	<tr>
+		<td>service URL:</td> <td><input id="url" value="http://localhost:3000" onkeyup="handleKey"></td>
+	</tr><tr>
+		<td>path:</td> <td><input id="path" value="/system7/article" onkeyup="handleKey"></td>
+	</tr><tr>
+		<td>body:</td> <td><textarea id="body" onkeyup="handleKey"></textarea></td>
+	</tr><tr>
+		<td></td><td><input type="button" onclick="go()" value="go"></td>
+	</tr><tr>
+		<td>output:</td><td id="output"></td>
+	</tr>
+	</table>
+
+	<style>
+	input, textarea, #output {
+		font-size: 14px;
+		padding: 5;
+		width: 500px;
+		max-width: 500px;
+	}
+	#output {
+		background: #eee;
+		padding: 10px;
+		font-family: monospace;
+		white-space: pre-wrap;
+	}
+	</style>
+
+	<script>
+	function handleKey(event) {
+		if (event.keyCode==13) go();
+	}
+
+	function go() {
+		var url = document.getElementById('url').value;
+		var path = document.getElementById('path').value;
+		var body = document.getElementById('body').value;
+
+		var xhr = new XMLHttpRequest();
+		var method = body.length > 0 ? 'POST' : 'GET';
+		xhr.open(method,url+path);
+		if (method=='POST') xhr.setRequestHeader('Content-Type','application/json');
+	    xhr.timeout = 4000;
+	    xhr.ontimeout = function () { alert("Timed out!!!"); }
+	    xhr.onload = function() {
+			document.getElementById('output').innerHTML = xhr.responseText;
+
+	    }
+		xhr.send(getBody());
+
+
+		// save state
+		localStorage.setItem('url',url);
+		localStorage.setItem('path',path);
+		localStorage.setItem('body',body);
+
+		function getBody() {
+			if (method!='POST') return null;
+			return body;
+			// return encodeURIComponent(body);
+		}
+	}
+
+	document.getElementById('url').value = localStorage.getItem('url');
+	document.getElementById('path').value = localStorage.getItem('path');
+	document.getElementById('body').value = localStorage.getItem('body');
+	</script>
+</body>
+</html>

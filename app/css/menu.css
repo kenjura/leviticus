@@ -1,0 +1,129 @@
+/* TRADITIONAL TOP MENU */
+/*#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+}*/
+
+.menu {
+	/*background-color: #222;*/
+	color: white;
+	line-height: 40px;
+	white-space: nowrap;
+	-webkit-perspective-origin: center 40px;
+	-webkit-perspective: 1000;
+}
+.menu ul, .menu li {
+	margin: 0;
+	padding: 0;
+}
+.menu ul li {
+	display: inline-block;
+	position: relative;
+}
+.menu ul ul li {
+	display: block;
+	line-height: normal;
+}
+.menu ul ul {
+	background-color: #222;
+	height: 0;
+	left:0;
+	overflow: auto;
+	position: absolute;
+	top:100%;
+	/*transition: height 3s;*/
+	box-shadow: 0 5px 5px 0 black;
+}
+not really .menu ul ul {
+	height: auto;
+	-webkit-transform: scaleY(0);
+	/*-webkit-transform: rotateX(-90deg);*/
+	-webkit-transform-origin: top left;
+	transition: -webkit-transform 0.3s;
+}
+.menu li:hover > ul {
+	height: calc(100vh - 40px);
+	overflow: visible;
+	-webkit-transform: scaleY(1);
+	/*-webkit-transform: rotateX(0deg);*/
+}
+.menu ul ul a:only-child::after {
+	display: none;
+}
+.menu ul ul a::after {
+	content: ">";
+	position: absolute;
+	right: 10px;
+}
+.menu ul ul ul {
+	background-color: #333;
+	left: 100%;
+	position: absolute;
+	top: 0;
+}
+.menu ul li {
+	cursor: pointer;
+	padding: 0px 10px;
+	text-decoration: none;
+	color: hsl(0, 0%, 50%);
+	display: inline-block;
+	font-family: Open Sans;
+	font-size: 100%;
+	font-weight: normal;
+	letter-spacing: -0.7px;
+}
+.menu ul ul a {
+	/* padding: 0px 25px 0 10px; */
+}
+.menu li > a {
+	color: white;
+}
+
+/* SIDE-MOUNTED MENU THAT ALMOST WORKS
+#header {
+	background-color: #222;
+	height: 100vh;
+	left: 0;
+	max-width: 15vw;
+	position: fixed;
+	top: 0;
+}
+
+.menu ul, .menu li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.menu a {
+	color: #ddd;
+	cursor: pointer;
+	display: block;
+	font-weight: lighter;
+	padding: 5px;
+	text-decoration: none;
+}
+.menu a:hover {
+	color: white;
+}
+.menu ul {
+}
+.menu ul ul {
+	position: absolute;
+	background-color: #333;
+	height: 100%;
+	left: 100%;
+	overflow: auto;
+	width: 0;
+	top: 0;
+	transition: width 0.3s;
+}
+.menu li:hover {
+	background-color: #333;
+}
+.menu li:hover ul {
+	width: 100%;
+}
+*/

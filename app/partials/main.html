@@ -1,0 +1,39 @@
+<div id="main" adminWidth="{{app.state.admin.state.width}}" tocVisible="{{app.state.toc.value}}" ng-controller="com.bertball.controllers.MainCtrl">
+
+	<div ng-if="app.mode=='noDatabase'">
+		<h1>There is no database selected.</h1>
+		<ul>
+			<li><div class="link" onclick="window.location='/BDH'">BDH</div></li>
+			<li><div class="link" onclick="window.location='/Faerun'">Faerun</div></li>
+			<li><div class="link" onclick="window.location='/Homeworlds'">Homeworlds</div></li>
+			<li><div class="link" onclick="window.location='/Oathkeep'">Oathkeep</div></li>
+			<li><div class="link" onclick="window.location='/StarWars'">Star Wars</div></li>
+			<li><div class="link" onclick="window.location='/System7'">System7</div></li>
+		</ul>
+	</div>
+	<div ng-if="app.mode=='error'">
+		<h1>Error</h1>
+		<div>{{app.error}}</div>
+	</div>
+
+	<div class="article_oldRevision" ng-if="redirectUrl">
+		<p>This is a redirect page. Please visit <a href="{{redirectUrl}}">{{redirectUrl}}</a> for the content you're looking for.</p>
+
+		<p>Content creators, please note: redirection is not preferred in most cases. It is best used when an article has changed name unexpectedly. When linking to an article with text other than its name, please use the syntax: [[actual article name | preferred linking text]]</p>
+	</div>
+
+	<div class="article_oldRevision" ng-if="app.location.query.revisionId">
+		You are viewing an old revision of this file. Any edits made will change the old revision. If this is not your intent, <a ng-click="app.gotoArticle()">click here</a> to return to the current version of the article.
+	</div>
+
+	<div class="diffMode" ng-if="app.diffMode">
+		You are viewing a diff between two revisions. <a ng-click="app.gotoArticle()">click here</a> to return to the current version of the article.
+	</div>
+
+	<div id="diffTarget" ng-if="app.diffMode"></div>
+
+	<div id="articleView" class="articleView" ng-hide="app.diffMode">
+		<div class="articleView_main" bind-html="getArticleRendered()" compile="true" auto-update="app.state.admin.state.width!='full'"></div>
+		<div class="articleView_right" bind-html="getArticleRendered_sidebar()" compile="true" auto-update="app.state.admin.state.width!='full'"></div>
+	</div>
+</div>

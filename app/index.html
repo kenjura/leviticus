@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="leviticus" ng-controller="com.bertball.controllers.HomeCtrl as homeCtrl">
+<head>
+	<title>{{homeCtrl.getTitle()}}</title>
+
+	<meta name="viewport" content="width=640, initial-scale=0.5">
+
+	<link rel="stylesheet" href="/css/fonts.css" />
+	<link rel="stylesheet" href="/css/icomoon-fonts.css" />
+
+	<link rel="stylesheet" href="/css/site.css" />
+	<link rel="stylesheet" href="/css/components.css" />
+	<link rel="stylesheet" href="/css/admin.css" />
+	<link rel="stylesheet" href="/css/error.css" />
+	<link rel="stylesheet" href="/css/header.css" />
+	<link rel="stylesheet" href="/css/image.css" />
+	<link rel="stylesheet" href="/css/main.css" />
+	<link rel="stylesheet" href="/css/menu.css" />
+	<link rel="stylesheet" href="/css/mobile.css" />
+	<link rel="stylesheet" href="/css/toc.css" />
+
+</head>
+<body ng-keypress="homeCtrl.handleKey(event)">
+
+	<style ng-if="homeCtrl.app.state.useStyle.value" bind-html="homeCtrl.renderStyle()"></style>
+
+	<div ng-include="'/partials/header.html'"></div>
+	<div ng-include="'/partials/admin.html'"></div>
+	<div ng-include="'/partials/toc.html'"></div>
+	<div ng-include="'/partials/main.html'"></div>
+	<div ng-include="'/partials/error.html'"></div>
+	<div ng-include="'/partials/image.html'"></div>
+
+	<script src="/lib/angular.min.js"></script>
+	<script src="/lib/promise.min.js"></script>
+	<script src="/lib/underscore.min.js"></script>
+	<script src="/lib/jsdifflib.js"></script>
+	<script src="/lib/smoothScroll.js"></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/com/bertball/controllers/AdminCtrl.js"></script>
+	<script src="/js/com/bertball/controllers/HeaderCtrl.js"></script>
+	<script src="/js/com/bertball/controllers/HomeCtrl.js"></script>
+	<script src="/js/com/bertball/controllers/ImageCtrl.js"></script>
+	<script src="/js/com/bertball/controllers/MainCtrl.js"></script>
+	<script src="/js/com/bertball/controllers/SearchCtrl.js"></script>
+	<script src="/js/com/bertball/controllers/UserCtrl.js"></script>
+	<script src="/js/com/bertball/controllers/TOCCtrl.js"></script>
+	<script src="/js/com/bertball/dal/DAL.js"></script>
+	<script src="/js/com/bertball/directives/AdminControl.js"></script>
+	<script src="/js/com/bertball/directives/AdminPanel.js"></script>
+	<script src="/js/com/bertball/directives/BindHtml.js"></script>
+	<script src="/js/com/bertball/directives/Datagrid.js"></script>
+	<script src="/js/com/bertball/directives/Dropdown.js"></script>
+	<script src="/js/com/bertball/model/Application.js"></script>
+	<script src="/js/com/bertball/model/Article.js"></script>
+	<script src="/js/com/bertball/model/Cache.js"></script>
+	<script src="/js/com/bertball/model/Config.js"></script>
+	<script src="/js/com/bertball/model/Menu.js"></script>
+	<script src="/js/com/bertball/model/State.js"></script>
+	<script src="/js/com/bertball/model/User.js"></script>
+	<script src="/js/com/bertball/model/Version.js"></script>
+	<script src="/js/com/bertball/model/WikiImage.js"></script>
+	<script src="/js/com/bertball/util/WikiUtil.js"></script>
+
+	<script>
+	    smoothScroll.init({ offset:40 });
+	</script>
+
+</body>
+</html>

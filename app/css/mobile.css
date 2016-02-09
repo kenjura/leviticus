@@ -1,0 +1,7 @@
+#altMenu { display: none; }
+
+@media (max-width: 769px) {
+	.gear { font-size: 40px; }
+	.menu { display: none; }
+	#altMenu { display: inline-block; line-height: 40px; text-decoration: none; }
+}

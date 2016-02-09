@@ -1,0 +1,76 @@
+<div id="header" ng-controller="com.bertball.controllers.HeaderCtrl">
+	<div id="menu" class="menu" bind-html="getMenuRendered()"></div>
+	<div class="button" id="altMenu" ng-click="altMenu()">Menu</div>
+	<div class="gears">
+		<dropdown data="app.version.versions" model="app.version.currentVersion" label-field="getLabel" on-select="changeCurrentVersion()"></dropdown>
+		<div class="gear icon-search" title="search" ng-click="app.state.search.toggle()" active="{{app.state.search.value}}" ></div>
+		<div class="gear icon-eye" title="styles" ng-click="app.state.useStyle.toggle()" active="{{app.state.useStyle.value}}"></div>
+		<!-- <div class="gear icon-star" title="favorites"></div> -->
+		<!-- <div class="gear icon-drawer" title="work queue"></div> -->
+		<div class="gear icon-user" title="user" ng-click="app.state.user.toggle()" active="{{app.state.user.value}}" badge="{{getBadge('user')}}"></div>
+		<div class="gear icon-list" title="menu" ng-click="app.state.admin.toggle()" active="{{app.state.admin.state.active}}"></div>
+	</div>
+</div>
+
+<div class="gear-panels">
+
+
+	<div class="gear-panel" which="search" active="{{app.state.search.value}}" ng-controller="com.bertball.controllers.SearchCtrl">
+		<div class="close-button icon-cross" ng-click="setMode('default');app.state.search.toggle()"></div>
+
+		<div class="header">Search</div>
+
+		<div><input ng-model="search"></div>
+
+		<div class="header" ng-if="results">{{results.length}} results.</div>
+
+		<div ng-repeat="res in results" class="linkButton" ng-bind="res.name" ng-click="app.gotoArticle(res.name)"></div>
+	</div>
+
+
+	<div class="gear-panel" which="user" active="{{app.state.user.value}}" ng-controller="com.bertball.controllers.UserCtrl">
+
+		<div class="close-button icon-cross" ng-click="setMode('default');app.state.user.toggle()"></div>
+
+		<div ng-if="mode=='default'">
+			<div ng-if="app.user">
+				<div class="header">logged in as:</div>
+				<div>{{app.user.name}}</div>
+				<div class="button block" ng-click="setMode('changePassword')">change password</div>
+				<div class="button block" ng-click="logout()">logout</div>
+			</div>
+
+			<div ng-if="!app.user">
+				<div class="header">You are not logged in.</div>
+				<form ng-submit="login()">
+					<div><input placeholder="username" ng-model="username" required></div>
+					<div><input placeholder="password" type="password" ng-model="password" required></div>
+					<input type="submit" class="button block" value="log in">
+					<div class="button block" ng-click="setMode('register')">register</div>
+				</form>
+			</div>
+		</div>
+
+		<div ng-if="mode=='changePassword'">
+			<div class="header">Change your password</div>
+			<form ng-submit="changePassword()">
+				<input placeholder="old password" type="password" ng-model="oldPassword" required>
+				<input placeholder="new password" type="password" ng-model="newPassword" required>
+				<input placeholder="new password (confirm)" type="password" ng-model="newPasswordConfirm" required>
+				<input type="submit" class="button block" value="change password">
+			</form>
+			<div class="button block" ng-click="setMode('default')">cancel</div>
+		</div>
+		
+		<div ng-if="mode=='register'">
+			<div class="header">Register a new user</div>
+			<form ng-submit="register()">
+				<input placeholder="username" type="text" ng-model="username" required>
+				<input placeholder="password" type="password" ng-model="password" required>
+				<input type="submit" class="button block" value="register">
+			</form>
+			<div class="button block" ng-click="setMode('default')">cancel</div>
+		</div>
+
+	</div>
+</div>

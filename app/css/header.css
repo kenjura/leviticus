@@ -1,0 +1,146 @@
+#header {
+	background-color: #222;
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-height: 40px;
+	width: 100%;
+	z-index: 1000;
+}
+
+.gear-panels {
+	position: fixed;
+	height: 40px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 950;
+}
+
+.menu {
+	position: relative;
+	z-index: 1050;
+}
+
+.gears {
+	background-color: #222;
+	position: absolute;
+	height: 100%;
+	right: 0;
+	top: 0;
+	padding-right: 5px;
+	z-index: 1100;
+}
+.gear {
+	border-color: transparent;
+	border-style: solid;
+	border-width: 0 1px;
+	color: #888;
+	cursor: pointer;
+	display: inline-block;
+	padding: 0 4px;
+	transition: color 0.3s;
+	box-sizing: border-box;
+	font-size: 20px;
+	line-height: 40px;
+	transition: border-color 0.5s, color 0.5s;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+.gear:hover {
+	color: white;
+	border-color: rgba(255,255,255,0.2);
+}
+.gear[active=true] {
+	color: orange;
+}
+
+.gear-icon {
+	opacity: 0.65;
+	width: 20px;
+}
+.gear-icon:hover {
+	opacity: 1;
+}
+
+.gear-panel {
+	background-color: #222;
+	box-sizing: border-box;
+	color: white;
+	padding: 5px 20px 20px 20px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	/*transition: bottom 0.3s;*/
+	z-index: 1025;
+}
+.gear-panel[active=true] {
+	bottom: auto;
+	top: 100%;
+	-webkit-animation: slideDown 0.3s;
+}
+.gear-panel[active=false] {
+	-webkit-animation: slideUp 0.3s;
+}
+.gear-panel .header {
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+@-webkit-keyframes slideDown {
+	from { top: -200% }
+	to { top: 100% }
+}
+
+
+.icon-bars, .icon-bars::before, .icon-bars::after {
+	background-color: #ddd;
+	/* border-radius:2px; */
+	display: inline-block;
+	height: 1px;
+	width: 15px;
+	position: relative;
+	top: -1px;
+	vertical-align: middle;
+	transition: background-color 0.3s;
+}
+.icon-bars:hover, .icon-bars:hover::before, .icon-bars:hover::after {
+	background-color: white;
+}
+.gear[active=true] .icon-bars, .gear[active=true] .icon-bars::before, .gear[active=true] .icon-bars::after {
+	background-color: orange;
+}
+.icon-bars::before, .icon-bars::after {
+	content: " ";
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.icon-bars::before {
+	top: -5px;
+}
+.icon-bars::after {
+	top: 5px;
+}
+/*
+.gear {
+	position: relative;
+}
+.gear::after {
+	background-color: #222;
+	border-radius: 3px;
+	color: white;
+	display: inline-block;
+	padding: 2px 3px;
+	position: absolute;
+	text-align: center;
+	top: calc(100% + 5px);
+	-webkit-transform: scale(0);
+}
+.gear:hover::after {
+	-webkit-transform: scale(1);
+}
+.gear.icon-toc::after { content: "Table of Contents"; }
+.gear.icon-search::after { content: "Search"; }
+.gear.icon-eye::after { content: "Use Custom Styles"; }
+.gear.icon-user::after { content: "User"; }
+.gear.icon-list::after { content: "List"; }*/

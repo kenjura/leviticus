@@ -1,0 +1,32 @@
+.error {
+	background-color: hsl(0,100%,35%);
+	box-sizing: border-box;
+	color: white;
+	font-weight: bold;
+	height: 0;
+	line-height: 40px;
+	position: fixed;
+	overflow: auto;
+	padding: 0 40px 0 10px;
+	text-align: right;
+	top: 40px;
+	transition: height 0.5s;
+	width: 100%;
+}
+.error[active=true] {
+	height: 40px;
+}
+
+
+.error-close {
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	transition: color 0.3s;
+}
+.error-close:hover {
+	color: black;
+}

@@ -1,0 +1,13 @@
+<div class="imagePanel" ng-controller="com.bertball.controllers.ImageCtrl" isOpen="{{isOpen}}">
+	<div class="admin-panel-header">
+		<span class="left">Image Manager: {{activeImage.name}}</span>
+		<div class="button" ng-click="close()">close</div>
+		<div class="button" ng-click="upload()">upload</div>
+	</div>
+	<div class="admin-panel-body">
+		<div class="activeImageContainer" is-empty="{{isEmpty()}}">
+			<img class="activeImage" src="{{getUrl()}}">
+		</div>
+	</div>
+	<input type="file" id="uploadInput">
+</div>

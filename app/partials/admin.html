@@ -1,0 +1,52 @@
+<div id="admin" width="{{homeCtrl.app.state.admin.state.width}}" ng-controller="com.bertball.controllers.AdminCtrl">
+
+	<admin-control state-name="articleEdit" label="edit article"></admin-control>
+	<admin-control state-name="menuEdit" label="edit menu"></admin-control>
+	<admin-control state-name="styleEdit" label="edit style"></admin-control>
+
+	<br ng-show="app.state.admin.state.mode=='menu'">
+
+	<admin-control state-name="revisions" label="revisions"></admin-control>
+	<admin-control state-name="versions" label="versions"></admin-control>
+	<admin-control state-name="updates" label="updates"></admin-control>
+
+	<br ng-show="app.state.admin.state.mode=='menu'">
+
+	<admin-control state-name="allArticles" label="all articles"></admin-control>
+
+	<!-- <br ng-show="app.state.admin.state.mode=='menu'"> -->
+
+	<!-- <admin-control state-name="user" label="user"></admin-control> -->
+
+	<admin-panel class="red" state-name="articleEdit" label="Edit Article" model="app.article" editor="getArticleEditMode()"></admin-panel>
+	<admin-panel class="green" state-name="menuEdit" label="Edit Menu" model="app.menu" editor="'draft'"></admin-panel>
+	<admin-panel class="blue" state-name="styleEdit" label="Edit Style" model="app.style" editor="'draft'"></admin-panel>
+
+	<admin-panel class="brown" state-name="revisions" label="Revisions" model="app.article" model-field="revisions" editor="'datagrid'" actions="actions.revisions"></admin-panel>
+	<admin-panel class="aqua" state-name="versions" label="Versions" model="app.version.versions" editor="'datagrid'" actions="actions.versions">
+		<div class="button">Create new version</div>
+	</admin-panel>
+	<admin-panel class="purple" state-name="updates" label="Updates" editor="'datagrid'" model="app.updates" actions="actions.updates"></admin-panel>
+	<admin-panel class="gray" state-name="allArticles" label="All Articles" editor="'datagrid'" model="article.all" actions="actions.allArticles"></admin-panel>
+
+	<!-- <div class="admin-panel gray pad10" ng-if="app.state.admin.state.mode=='user'">
+		<div class="header">User</div>
+
+		<div ng-if="app.user">
+			<div class="header">logged in as:</div>
+			<div>{{app.user.name}}</div>
+			<div class="button block">change password</div>
+			<div class="button block">logout</div>
+		</div>
+
+		<div ng-if="!app.user">
+			<div class="header">You are not logged in.</div>
+			<form ng-submit="login.submit()">
+				<div><input placeholder="username" ng-model="login.username" required></div>
+				<div><input placeholder="password" type="password" ng-model="login.password" required></div>
+				<div><input type="submit" value="log in"></div>
+			</form>
+		</div>
+	</div> -->
+
+</div>

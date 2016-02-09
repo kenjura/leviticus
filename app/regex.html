@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+	regex: <input id="regex" value="/foo/" onkeyup="go()"> no slashes!
+	<br>
+	string: <input id="string" onkeyup="go()">
+	<br>
+	output: <div id="output"></div>
+
+	<style>
+	input {
+		font-size: 14px;
+		padding: 5;
+		width: 500px;
+	}
+	#output {
+		font-family: monospace;
+		white-space: pre;
+	}
+	</style>
+
+	<script>
+	function go() {
+		go_php();
+	}
+
+	function go_js() {
+		var regex = document.getElementById('regex').value;
+		var string = document.getElementById('string').value;
+		localStorage.setItem('regex',regex);
+		localStorage.setItem('string',string);
+		var output = string.match(new RegExp(regex));
+		var str = '';
+		document.getElementById('output').innerHTML = '';
+		for (var i in output) {
+			str += i + ' = ' + output[i] + '<br>';
+		}
+		document.getElementById('output').innerHTML = str;
+	}
+
+	function go_php() {
+		var regex = document.getElementById('regex').value;
+		var string = document.getElementById('string').value;
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET','/api/?pattern='+encodeURIComponent(regex)+'&subject='+encodeURIComponent(string),false);
+		xhr.send();
+		document.getElementById('output').innerHTML = xhr.responseText;
+	}
+
+	document.getElementById('regex').value = localStorage.getItem('regex');
+	document.getElementById('string').value = localStorage.getItem('string');
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+#main {
+	margin-top: 40px;
+	width: 100vw;
+	transition: width 0.3s;
+}
+.article_oldRevision, .diffMode {
+	background-color: yellow;
+	border: 5px solid black;
+	font-weight: bold;
+	padding: 20px;
+}
+
+#main[adminWidth="quarter"] {
+	width: 75vw;
+}
+#main[adminWidth="half"], #main[adminWidth="full"] {
+	width: 50vw;
+}
+#main {
+	box-sizing: border-box;
+}
+#main[tocVisible="true"] #articleView {
+	padding-left: 200px;
+}
+
+#articleView {
+	min-height: calc(100vh - 40px);
+	transition: padding-left 0.3s;
+}
+#articleView[valid=false]::before {
+	background-color: hsl(0,100%,80%);
+	color: black;
+	content: "Invalid HTML";
+	display: block;
+	font-weight: bold;
+	padding: 5px;
+	width: 100%;
+}
+
+/*#articleView { width: 100%; display: table; table-layout: fixed; }*/
+#articleView { 
+	box-sizing: border-box;
+	display: table; 
+	/*table-layout: fixed; */
+	width: 100%; 
+}
+.articleView_main, .articleView_right { display: table-cell; vertical-align: top; }
+.articleView_main .sectionOuter.right { display: none; }

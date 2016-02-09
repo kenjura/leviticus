@@ -1,0 +1,136 @@
+#admin {
+	background: #222;
+	box-sizing: border-box;
+	font-weight: normal;
+	left: 100vw;
+	height: 100vh;
+	padding-top: 40px;
+	position: fixed;
+	top: 0;
+	width: 200px;
+	transition: box-shadow 0.3s, left 0.3s, width 0.3s;
+	z-index: 900;
+}
+#admin[width="menu"], #admin[width="half"], #admin[width="quarter"] {
+	box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+}
+#admin[width="menu"] {
+	left: calc(100vw - 200px);
+}
+#admin[width="quarter"] {
+	left: 75vw;
+	width: 25vw;
+}
+#admin[width="half"] {
+	left: 50vw;
+	width: 50vw;
+}
+#admin[width="full"] {
+	left: 0;
+	width: 100vw;
+}
+
+.admin-control {
+	background-color: #000;
+	border-style: solid;
+	border-width: 0 0 0 2px;
+	color: white;
+	line-height: 35px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	transition: border-width 0.3s;
+}
+.admin-control:hover {
+	cursor: pointer;
+	background-color: #111;
+}
+.admin-control[state="active"],
+.admin-control[state="inactive"] {
+	display: none;
+}
+.admin-control:nth-of-type(1) { border-color: hsl(0,100%,50%) }
+.admin-control:nth-of-type(2) { border-color: hsl(120,100%,50%) }
+.admin-control:nth-of-type(3) { border-color: hsl(240,100%,50%) }
+.admin-control:nth-of-type(4) { border-color: hsl(60,100%,50%) }
+.admin-control:nth-of-type(5) { border-color: hsl(180,100%,50%) }
+.admin-control:nth-of-type(6) { border-color: hsl(300,100%,50%) }
+
+
+.admin-panel {
+	height: 100%;
+	width: 100%;
+}
+.admin-panel textarea {
+	background-color: rgba(0,0,0,0.2);
+	border: none;
+	box-shadow: inset 0 0 15px -2px black;
+	box-sizing: border-box;
+	color: #92938f;
+	font-family: Anonymous Pro, monospace;
+	font-size: 16px;
+	margin: 0;
+	padding: 15px;
+	height: 100%;
+	width: 100%;
+}
+.admin-panel textarea:focus {
+	outline: none;
+}
+
+.admin-panel-header {
+	color: white;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 32px;
+	overflow: hidden;
+	padding-left: 10px;
+	text-align: right;
+	white-space: nowrap;
+}
+.admin-panel-header .button {
+	margin-left: 1px;
+	padding: 0 10px;
+}
+.admin-panel-sync[syncing="saving"] {
+	color: hsl(240,100%,70%);
+	-webkit-animation: rotate 1s infinite;
+	-webkit-transform-origin: center center;
+}
+@-webkit-keyframes rotate {
+	from { -webkit-transform: rotate(0deg) }
+	to { -webkit-transform: rotate(360deg) }
+}
+.admin-panel-sync[syncing="saved"] {
+	color: hsl(120,100%,50%);
+}
+
+.admin-panel-body {
+	color: white;
+	height: calc(100% - 32px);
+}
+.admin-panel-body[scroll="true"] {
+	overflow-y: auto;
+}
+
+.admin-panel.red { background-color: hsla(0,100%,50%,0.2) }
+.admin-panel.blue { background-color: hsla(240,100%,50%,0.2) }
+.admin-panel.green { background-color: hsla(120,100%,50%,0.2) }
+.admin-panel.brown { background-color: hsla(30,100%,50%,0.2) }
+.admin-panel.aqua { background-color: hsla(160,100%,50%,0.2) }
+.admin-panel.purple { background-color: hsla(280,100%,50%,0.2) }
+.admin-panel.gray { background-color: hsla(0,100%,100%,0.2) }
+
+.red a, .red .linkButton { color: hsla(0,100%,50%,0.5) }
+.blue a, .blue .linkButton { color: hsla(240,100%,50%,0.5) }
+.green a, .green .linkButton { color: hsla(120,100%,50%,0.5) }
+.brown a, .brown .linkButton { color: hsla(30,100%,50%,0.5) }
+.aqua a, .aqua .linkButton { color: hsla(160,100%,50%,0.5) }
+.purple a, .purple .linkButton { color: hsla(280,100%,50%,0.5) }
+
+
+.left { float: left; }
+.right { float: right; }
+
+.editor {
+	background-color: #272822;
+}

@@ -1,0 +1,173 @@
+<html>
+<head>
+	<style type="text/css">
+	body { font-family: Verdana; }
+	.link { color: red; font-weight: bold; cursor: pointer; }
+	.link:hover { color: orange; }
+	.link.active { color: green; }
+	.table { 
+		display: table;
+		border: 1px solid gray; 
+		border-width: 1px 1px 0 0;
+	}
+	.tr { display: table-row; }
+	.td { 
+		display: table-cell;  
+		border: 1px solid gray; 
+		border-width: 0 0 1px 1px;
+		padding: 2px 6px; 
+	}
+	</style>
+	<script type="text/JavaScript">
+		var excel;
+		var shorthand;
+	
+		function convert() {
+			excel = document.getElementById('in').value.toString();
+			
+			findPossibleWikilinks();
+			doConvert(); }
+		
+		function doConvert() {
+			shorthand = excel;
+			shorthand = shorthand.replace( /^/mg , '|' );		// first cell
+			shorthand = shorthand.replace( /\t/g , ' ||' );		// table cells			
+			shorthand = shorthand.replace( /\n/g , '\n|-\n' );	// new lines
+			shorthand = shorthand.replace( /^/g , '{|\n' );		// table start
+			shorthand = shorthand.replace( /$/g , '\n|}' );		// table end
+			shorthand = shorthand.replace( /^\|([^\|]+)( \|\|)+$/mg , '!20|$1' );		// full-width colspans
+			
+			for (var i = 0; i < wikilinks.length; i++) {
+				var re = '('+wikilinks[i]+')';
+				console.log(re);
+				var regExp = new RegExp(re,'gi');
+				//regExp.global = true;
+				//regExp.ignoreCase = true;
+				console.log(regExp);
+				shorthand = shorthand.replace( regExp , '[[$1]]' );
+			}
+			
+			document.getElementById('in').value = shorthand;			
+		}
+		
+		function findPossibleWikilinks() {
+			var ignoreDashes = document.getElementById('ignoreDashes').checked;
+			var ignoreNumbers = document.getElementById('ignoreNumbers').checked;
+		
+			var allStrings = excel.match( /([^\t\n]+)/gi );
+			
+			// group by match
+			var grouped = [];
+			var added = false;
+			for (var i = 0; i < allStrings.length; i++) {
+				if (allStrings[i]=='-' && ignoreDashes) continue;
+				if (ignoreNumbers && !isNaN(allStrings[i])) continue;
+				added = false;
+				for (var j = 0; j < grouped.length; j++) {
+					if (grouped[j].match==allStrings[i]) {
+						grouped[j].count++;
+						added = true;
+					}
+				}
+				if (!added) grouped.push( {match:allStrings[i],count:0} );
+			}
+			
+			// sort by highest
+			var sorted = grouped;
+			sorted = sorted.sort(function(a,b) {
+				if (a.count>b.count) return -1;
+				else if (a.count<b.count) return 1;
+				else return 0;
+			});
+			
+			// display
+			displayPossibleWikilinks(sorted);
+		}
+		
+		function displayPossibleWikilinks(links) {
+			var target = document.getElementById('wikilinks');
+			
+			var html = '';
+			var rowHtml = '';
+			var actionHtml = '';
+			
+			var template = '<div class="tr">\n\t<div class="td">{~action~}</div>\n\t<div class="td">{~match~}</div>\n\t<div class="td">{~count~}</div>\n</div>';
+			var action = '<a id="{~id~}" class="link" onclick="toggleActive(this.id);" wikilink="{~match~}">not a wikilink</a>';
+			
+			for (var i = 0; i < links.length; i++) {
+				rowHtml = template;
+				rowHtml = rowHtml.replace( /{~match~}/ , links[i].match );
+				rowHtml = rowHtml.replace( /{~count~}/ , links[i].count );
+				actionHtml = action;
+				actionHtml = actionHtml.replace( /{~id~}/i , 'link'+i );
+				actionHtml = actionHtml.replace( /{~match~}/i , links[i].match );
+				rowHtml = rowHtml.replace( /{~action~}/ , actionHtml );
+				html += rowHtml;
+			}
+			
+			target.innerHTML = html;
+		}
+		
+		function toggleActive(id) {
+			var target = document.getElementById(id);
+			
+			if (target.innerHTML=='not a wikilink') {
+				target.innerHTML = 'wikilink';
+				target.className = 'link active';
+				addWikilink(target.getAttribute('wikilink'));
+			} else {
+				target.innerHTML = 'not a wikilink';
+				target.className = 'link';
+				deleteWikilink(target.getAttribute('wikilink'));
+			}
+			doConvert();
+		}
+		
+		var wikilinks = [];
+		function addWikilink(match) {
+			for (var i = 0; i < wikilinks.length; i++) {
+				if (wikilinks[i]==match) return;
+			}
+			wikilinks.push(match);
+		}
+		function deleteWikilink(match) {
+			for (var i = 0; i < wikilinks.length; i++) {
+				if (wikilinks[i]==match) wikilinks.splice(i,1);
+			}
+		}
+	</script>
+</head>
+<body>
+	Copy from Excel, paste here:
+	<textarea id="in" style="width: 90%; margin-left: 5%; height: 400px;" onkeydown="if (event.keyCode == 13) (convert())"></textarea>
+	<br />
+	<input type="button" value="convert to Shorthand" style="font-size: 20px; font-weight: bold;" onclick="convert()" />
+	<br />
+	<div style="float: right; background: #CCC; padding: 10px; margin: 20px;">
+		<table>
+			<tr>
+				<td><input type="checkbox" id="ignoreDashes" checked="true" onchange="findPossibleWikilinks()" /></td>
+				<td>Ignore dashes</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="ignoreNumbers" checked="true" onchange="findPossibleWikilinks()" /></td>
+				<td>Ignore numbers</td>
+			</tr>
+		</table>
+		<div id="wikilinks" class="table">
+		</div>
+	</div>
+	<div>
+		<h3>Pro Tips</h3>
+		<ul>
+			<li>You can just press enter immediately after pasting instead of clicking the button.</li>
+			<li>This may leave blank rows above and/or below your data. Should be removed.</li>
+		</ul>
+		<h3>Feature Wish List</h3>
+		<ul>
+			<li>Automatically interpret top row as table headers</li>
+			<li>Allow for batch processing of links (e.g. find all instance of "Kinetic" and make it a wikilink)</li>
+		</ul>
+	</div>
+</body>
+</html>
